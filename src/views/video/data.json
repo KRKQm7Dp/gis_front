@@ -1,0 +1,169 @@
+{
+  "nginx_version": [
+    "1.16.1"
+  ],
+  "nginx_rtmp_version": [
+    "1.1.4"
+  ],
+  "compiler": [
+    "gcc 4.8.5 20150623 (Red Hat 4.8.5-39) (GCC) "
+  ],
+  "built": [
+    "Dec 28 2019 12:57:47"
+  ],
+  "pid": [
+    "17640"
+  ],
+  "uptime": [
+    "870802"
+  ],
+  "naccepted": [
+    "57"
+  ],
+  "bw_in": [
+    "1357520"
+  ],
+  "bytes_in": [
+    "2230529440"
+  ],
+  "bw_out": [
+    "0"
+  ],
+  "bytes_out": [
+    "34027579"
+  ],
+  "server": [
+    {
+      "application": [
+        {
+          "name": [
+            "myapp"
+          ],
+          "live": [
+            {
+              "stream": [
+                {
+                  "name": [
+                    "test1"
+                  ],
+                  "time": [
+                    "557197"
+                  ],
+                  "bw_in": [
+                    "1334744"
+                  ],
+                  "bytes_in": [
+                    "76878542"
+                  ],
+                  "bw_out": [
+                    "0"
+                  ],
+                  "bytes_out": [
+                    "0"
+                  ],
+                  "bw_audio": [
+                    "66944"
+                  ],
+                  "bw_video": [
+                    "1267800"
+                  ],
+                  "client": [
+                    {
+                      "id": [
+                        "41606"
+                      ],
+                      "address": [
+                        "223.104.17.213"
+                      ],
+                      "time": [
+                        "557882"
+                      ],
+                      "flashver": [
+                        "FMLE/3.0 (compatible; FMSc/1.0)"
+                      ],
+                      "swfurl": [
+                        "rtmp://39.107.125.189:1935/myapp"
+                      ],
+                      "dropped": [
+                        "0"
+                      ],
+                      "avsync": [
+                        "18"
+                      ],
+                      "timestamp": [
+                        "555417"
+                      ],
+                      "publishing": [
+                        ""
+                      ],
+                      "active": [
+                        ""
+                      ]
+                    }
+                  ],
+                  "meta": [
+                    {
+                      "video": [
+                        {
+                          "width": [
+                            "1280"
+                          ],
+                          "height": [
+                            "720"
+                          ],
+                          "frame_rate": [
+                            "30"
+                          ],
+                          "codec": [
+                            "H264"
+                          ],
+                          "profile": [
+                            "High"
+                          ],
+                          "compat": [
+                            "0"
+                          ],
+                          "level": [
+                            "3.1"
+                          ]
+                        }
+                      ],
+                      "audio": [
+                        {
+                          "codec": [
+                            "AAC"
+                          ],
+                          "profile": [
+                            "LC"
+                          ],
+                          "channels": [
+                            "2"
+                          ],
+                          "sample_rate": [
+                            "44100"
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "nclients": [
+                    "1"
+                  ],
+                  "publishing": [
+                    ""
+                  ],
+                  "active": [
+                    ""
+                  ]
+                }
+              ],
+              "nclients": [
+                "1"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
