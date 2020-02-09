@@ -2,24 +2,29 @@ import axios from 'axios'
 import { MessageBox, Message } from 'element-ui'
 import store from '@/store'
 import { getToken } from '@/utils/auth'
+import router from '@/router'
 
 // create an axios instance
 const service = axios.create({
-  baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
+  // baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
   // withCredentials: true, // send cookies when cross-domain requests
-  timeout: 5000 // request timeout
+  timeout: 5000, // request timeout
+  // headers: {
+  //   'Authorization': 'Bearer ' + getToken(),
+  //   // 'Content-Type': "application/json;charset=utf-8",
+  // },
 })
 
-// request interceptor
 service.interceptors.request.use(
   config => {
-    // do something before request is sent
 
     if (store.getters.token) {
-      // let each request carry token
-      // ['X-Token'] is a custom headers key
-      // please modify it according to the actual situation
-      config.headers['X-Token'] = getToken()
+      config.headers['Authorization'] = 'Bearer ' + getToken()
+    }
+    for (var key in config.params){
+        if (config.params[key] === ''){
+            delete config.params[key]
+        }
     }
     return config
   },
@@ -30,23 +35,14 @@ service.interceptors.request.use(
   }
 )
 
-// response interceptor
 service.interceptors.response.use(
-  /**
-   * If you want to get http information such as headers or status
-   * Please return  response => response
-  */
-
-  /**
-   * Determine the request status by custom code
-   * Here is just an example
-   * You can also judge the status by HTTP Status Code
-   */
   response => {
     const res = response.data
+    console.log('--------------------')
+    console.log(response)
 
     // if the custom code is not 20000, it is judged as an error.
-    if (res.code !== 20000) {
+    if (res.code !== 200 && response.status !== 201 && response.status !== 204 ) {
       Message({
         message: res.message || 'Error',
         type: 'error',
@@ -68,16 +64,34 @@ service.interceptors.response.use(
       }
       return Promise.reject(new Error(res.message || 'Error'))
     } else {
-      return res
+      return response
     }
   },
   error => {
-    console.log('err' + error) // for debug
-    Message({
-      message: error.message,
-      type: 'error',
-      duration: 5 * 1000
-    })
+    console.log(error.response)
+    if(error.response.status === 401){
+      Message({
+        message: "请求未授权",
+        type: 'error',
+        duration: 5 * 1000
+      })
+      router.push('/401')
+    }
+    else if(error.response.status === 404){
+      Message({
+        message: "请求出错",
+        type: 'error',
+        duration: 5 * 1000
+      })
+      router.push('/404')
+    }
+    else if(error.response.status === 400){
+      Message({
+        message: error.response.data.message,
+        type: 'error',
+        duration: 5 * 1000
+      })
+    }
     return Promise.reject(error)
   }
 )

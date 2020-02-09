@@ -29,12 +29,12 @@ Vue.prototype.$video = Video
  * you can execute: mockXHR()
  *
  * Currently MockJs will be used in the production environment,
- * please remove it before going online! ! !
+ * please remove it before going online! ! !   development
  */
-import { mockXHR } from '../mock'
-if (process.env.NODE_ENV === 'development') {
-  mockXHR()
-}
+// import { mockXHR } from '../mock'
+// if (process.env.NODE_ENV === 'development') {
+//   mockXHR()
+// }
 
 // Vue.use(new VueSocketIO({
 //   debug: true,

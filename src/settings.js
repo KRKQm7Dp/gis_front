@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: 'Vue Admin Template',
+  title: 'GIS 数字系统',
 
   /**
    * @type {boolean} true | false

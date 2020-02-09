@@ -28,34 +28,15 @@ router.beforeEach(async(to, from, next) => {
       next({ path: '/' })
       NProgress.done()
     } else {
-      // determine whether the user has obtained his permission roles through getInfo
-      const hasRoles = store.getters.roles && store.getters.roles.length > 0
-      console.log('hasRole=' + hasRoles)
-      if (hasRoles) {
+      const hasGetUserInfo = store.getters.name
+      if (hasGetUserInfo) {
         next()
       } else {
         try {
           // get user info
-          // note: roles must be a object array! such as: ['admin'] or ,['developer','editor']
-          const userInfo = await store.dispatch('user/getInfo')
-          console.log(userInfo)
-          const roles = store.getters.roles
+          await store.dispatch('user/getInfo')
 
-          // generate accessible routes map based on roles
-          const accessRoutes = await store.dispatch('permission/generateRoutes', roles)
-          
-          console.log(accessRoutes)
-
-
-          // router.options.routes = store.getters.permission_routes // 此处需要根据 sideBar 的生成方式来判断，否则 addRoutes 不生效 src\layout\components\Sidebar\index.vue
-          // console.log(store.getters.permission_routes)  //github 上这个 issues 解决这个问题 https://github.com/vuejs/vue-router/issues/1859
-
-          // dynamically add accessible routes
-          router.addRoutes(accessRoutes)
-
-          // hack method to ensure that addRoutes is complete
-          // set the replace: true, so the navigation will not leave a history record
-          next({ ...to, replace: true })
+          next()
         } catch (error) {
           // remove token and go to login page to re-login
           await store.dispatch('user/resetToken')
@@ -67,7 +48,6 @@ router.beforeEach(async(to, from, next) => {
     }
   } else {
     /* has no token*/
-
     if (whiteList.indexOf(to.path) !== -1) {
       // in the free login whitelist, go directly
       next()
