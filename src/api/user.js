@@ -40,8 +40,31 @@ export function logout() {
 
 export function getUserByPage(query){
   return request({
-    url: process.env.VUE_APP_BASE_API + "/api/user/getUserByPage",
+    url: process.env.VUE_APP_BASE_API + "/api/users",
     method: 'get',
     params: query
+  })
+}
+
+export function addUser(data){
+  return request({
+    url: process.env.VUE_APP_BASE_API + "/api/user",
+    method: 'post',
+    data
+  })
+}
+
+export function updateUser(id, data){
+  return request({
+    url: process.env.VUE_APP_BASE_API + `/api/user/${id}`,
+    method: 'put',
+    data
+  })
+}
+
+export function deleteUser(id){
+  return request({
+    url: process.env.VUE_APP_BASE_API + `/api/user/${id}`,
+    method: 'delete',
   })
 }

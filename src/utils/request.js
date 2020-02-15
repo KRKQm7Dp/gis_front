@@ -8,7 +8,7 @@ import router from '@/router'
 const service = axios.create({
   // baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
   // withCredentials: true, // send cookies when cross-domain requests
-  timeout: 5000, // request timeout
+  timeout: 30000, // request timeout
   // headers: {
   //   'Authorization': 'Bearer ' + getToken(),
   //   // 'Content-Type': "application/json;charset=utf-8",
@@ -69,29 +69,41 @@ service.interceptors.response.use(
   },
   error => {
     console.log(error.response)
-    if(error.response.status === 401){
-      Message({
-        message: "请求未授权",
-        type: 'error',
-        duration: 5 * 1000
-      })
-      router.push('/401')
-    }
-    else if(error.response.status === 404){
-      Message({
-        message: "请求出错",
-        type: 'error',
-        duration: 5 * 1000
-      })
-      router.push('/404')
-    }
-    else if(error.response.status === 400){
-      Message({
-        message: error.response.data.message,
-        type: 'error',
-        duration: 5 * 1000
-      })
-    }
+    Message({
+      message: error.message,
+      type: 'error',
+      duration: 5 * 1000
+    })
+    // if(error.response.status === 401){
+    //   Message({
+    //     message: "请求未授权",
+    //     type: 'error',
+    //     duration: 5 * 1000
+    //   })
+    //   router.push('/401')
+    // }
+    // else if(error.response.status === 404){
+    //   Message({
+    //     message: "请求出错",
+    //     type: 'error',
+    //     duration: 5 * 1000
+    //   })
+    //   router.push('/404')
+    // }
+    // else if(error.response.status === 400){
+    //   Message({
+    //     message: error.response.data.message,
+    //     type: 'error',
+    //     duration: 5 * 1000
+    //   })
+    // }
+    // else if(error.response.status === 500){
+    //   Message({
+    //     message: error.response.data.message,
+    //     type: 'error',
+    //     duration: 5 * 1000
+    //   })
+    // }
     return Promise.reject(error)
   }
 )

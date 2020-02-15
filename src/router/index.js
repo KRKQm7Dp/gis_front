@@ -70,7 +70,7 @@ export const asyncRoutes = [
   {
     path: '/user',
     component: Layout,
-    redirect: '/user/manager',
+    redirect: '/user/home',
     name: 'User',
     meta: { 
       title: '用户及权限管理', 
@@ -94,6 +94,16 @@ export const asyncRoutes = [
         component: () => import('@/views/user/role/index'),
         meta: { 
           title: '角色管理', 
+          icon: 'tree',
+          roles: ['ROLE_ADMIN','super_editor']
+        }
+      },
+      {
+        path: 'druid',
+        name: 'Druid',
+        component: () => import('@/views/user/druid/index'),
+        meta: { 
+          title: '数据源监控', 
           icon: 'tree',
           roles: ['ROLE_ADMIN','super_editor']
         }

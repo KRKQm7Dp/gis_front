@@ -2,8 +2,8 @@ import request from '@/utils/request'
 
 export function getRoutes() {
   return request({
-    url: '/routes',
-    method: get
+    url: process.env.VUE_APP_BASE_API + '/api/routes',
+    method: 'get'
   })
 }
 
