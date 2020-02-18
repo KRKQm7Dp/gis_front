@@ -126,8 +126,8 @@
             </el-row>  
         </el-form>
       <div style="text-align:right;">
-        <el-button type="danger" @click="dialogVisible=false">Cancel</el-button>
-        <el-button type="primary" @click="confirmUser">Confirm</el-button>
+        <el-button type="danger" @click="dialogVisible=false">取消</el-button>
+        <el-button type="primary" @click="confirmUser">确认</el-button>
       </div>
     </el-dialog>
 

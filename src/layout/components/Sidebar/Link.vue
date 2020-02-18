@@ -28,7 +28,7 @@ export default {
       }
       return {
         is: 'router-link',
-        to: url
+        to: url // '/redirect' +   通过 src\views\redirect\index.vue 重定向，刷新路由
       }
     }
   }

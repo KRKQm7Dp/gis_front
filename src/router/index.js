@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import { getRoutes } from '@/api/role'
 
 Vue.use(Router)
 
@@ -31,6 +32,17 @@ import Layout from '@/layout'
  * all roles can be accessed
  */
 export const constantRoutes = [
+  {
+    path: '/redirect',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: '/redirect/:path*',
+        component: () => import('@/views/redirect/index')
+      }
+    ]
+  },
   {
     path: '/login',
     component: () => import('@/views/login/index'),
@@ -66,7 +78,8 @@ export const constantRoutes = [
   
 ]
 
-export const asyncRoutes = [
+export const asyncRoutes = 
+[
   {
     path: '/user',
     component: Layout,
@@ -130,6 +143,13 @@ export const asyncRoutes = [
         meta: { title: '推流列表', icon: 'table' }
       },
       {
+        path: '/video/play',
+        name: 'Play',
+        meta: { title: '播放页面'},
+        hidden: true,
+        component: () => import('@/views/video/push/play'),
+      },
+      {
         path: 'monitor',
         name: 'Monitor',
         component: () => import('@/views/video/monitor/index'),
@@ -152,7 +172,7 @@ export const asyncRoutes = [
 ];
 
 const createRouter = () => new Router({
-  // mode: 'history', // require service support
+  mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRoutes
 })

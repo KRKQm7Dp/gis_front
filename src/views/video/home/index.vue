@@ -166,9 +166,10 @@ import SocketIO from 'socket.io-client'
 import VueSocketIO from 'vue-socket.io'
 import { secondsToHuman, byteToHuman } from '@/utils/helper'
 
+
 Vue.use(new VueSocketIO({
     debug: true,
-    connection: SocketIO('http://192.168.234.130:9991')
+    connection: SocketIO(process.env.VUE_APP_RTMP_MONITOR_URL) // 39.107.125.189
   }))
 
 export default {
