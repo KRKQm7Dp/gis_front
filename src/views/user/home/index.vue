@@ -1,6 +1,17 @@
+<style scoped>
+.box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+</style>
 <template>
   <div class='app-container'>
-    <el-button type="primary" @click="handleAddUser">新建用户</el-button>
+    <div class="box">
+      <el-input style="width: 300px; margin-right: 10px;" v-model="queryParam.search" placeholder="请输入用户名执行搜索"></el-input>
+      <el-button type="primary" @click="getUsers">搜索一下</el-button>
+      <el-button type="success" @click="handleAddUser">新建用户</el-button>
+    </div>
     <el-pagination
       background
       layout="prev, pager, next, total"
@@ -12,7 +23,7 @@
     </el-pagination>
       <el-table
         :data="tableData"
-        height="600"
+        height="620"
         border
         v-loading="loading"
         style="width: 100%;margin-top:30px;">
@@ -181,6 +192,7 @@ export default {
       queryParam:{
           pageNum: 1,
           pageSize: 10,
+          search: '' 
       },
       total: 0,
       roles: [],
@@ -208,6 +220,7 @@ export default {
   },
   methods:{
     getUsers(){
+      this.loading = true
         console.log(this.queryParam)
         getUserByPage(this.queryParam).then(response => {
             this.tableData = response.data.data.rows
@@ -249,9 +262,9 @@ export default {
       this.user = deepClone(scope.row)
     },
     handleDelete(scope) {
-      this.$confirm('Confirm to remove the user?', 'Warning', {
-        confirmButtonText: 'Confirm',
-        cancelButtonText: 'Cancel',
+      this.$confirm('确定删除用户?', 'Warning', {
+        confirmButtonText: '确认',
+        cancelButtonText: '取消',
         type: 'warning'
       }).then(async() => {
           await deleteUser(scope.row.uId).then(response => {

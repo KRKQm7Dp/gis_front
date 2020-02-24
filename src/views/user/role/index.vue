@@ -184,29 +184,27 @@ export default {
       })
     },
     handleDelete(scope) {
-      this.$confirm('Confirm to remove the role?', 'Warning', {
-        confirmButtonText: 'Confirm',
-        cancelButtonText: 'Cancel',
+      this.$confirm('确定删除角色?', 'Warning', {
+        confirmButtonText: '确认',
+        cancelButtonText: '取消',
         type: 'warning'
-      })
-      .then(async() => {
-          console.log('----------------row-------------------')
-          console.log(scope.row)
-          await deleteRole(scope.row.id).then(response => {
-            this.getRoles()
-            this.$message({
-              type: 'success',
-              message: response.data.data
-            })
-          }).catch(e => {
-            this.$message({
-              message: e.message,
-              type: 'error',
-              duration: 5 * 1000
-            })
+      }).then(async() => {
+        console.log('----------------row-------------------')
+        console.log(scope.row)
+        await deleteRole(scope.row.id).then(response => {
+          this.getRoles()
+          this.$message({
+            type: 'success',
+            message: response.data.data
+          })
+        }).catch(e => {
+          this.$message({
+            message: e.message,
+            type: 'error',
+            duration: 5 * 1000
           })
         })
-        .catch(err => {
+      }).catch(err => {
           console.error(err) 
           this.$message({
             type: 'error',

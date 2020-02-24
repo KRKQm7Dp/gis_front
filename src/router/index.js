@@ -6,6 +6,7 @@ Vue.use(Router)
 
 /* Layout */
 import Layout from '@/layout'
+import { getToken } from '@/utils/auth'
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -163,11 +164,24 @@ export const asyncRoutes =
     component: Layout,
     children: [
       {
-        path: 'http://localhost:8081/chat.jsp',
+        path: 'http://localhost:8082/chat/chatroom?UAA_ACCESS_TOKEN=' + getToken(),
         meta: { title: '交流中心', icon: 'link' }
       }
     ]
   },
+
+  // {
+  //   path: '/chatroom',
+  //   component: Layout,
+  //   redirect: '/chat',
+  //   children: [{
+  //     path: 'chat',
+  //     name: 'Chat',
+  //     component: () => import('@/views/chatroom/index'),
+  //     meta: { title: '交流中心', icon: 'link' }
+  //   }]
+  // },
+  
   { path: '*', redirect: '/404', hidden: true }
 ];
 
