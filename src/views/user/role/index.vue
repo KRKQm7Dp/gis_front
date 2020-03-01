@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <el-button type="primary" @click="handleAddRole">新建角色</el-button>
+    <el-button type="success" @click="handleAddRole">新建角色</el-button>
 
     <el-table :data="rolesList" style="width: 100%;margin-top:30px;" border v-loading="loading">
       <el-table-column

@@ -1,13 +1,95 @@
+<style>
+.el-input-group__prepend {
+    text-align: right;
+    width: 138.4px;
+}
+.right-row {
+    margin-top: 20px;
+}
+.ctrl-btn {
+    width: 50px;
+    height: 50px;
+}
+</style>
 <template>
-<el-row>
-    <el-col :span="24" style="text-align: center; line-height: 80px;">
-         <el-tag class="title-tag">正在播放 {{ this.name }} 处监控视频</el-tag>
-    </el-col>
-    <el-col :span="16" :offset="4">
-      <div class="grid-content bg-purple-dark"></div>
-      <video id='my-player' class="video-js vjs-big-play-centered vjs-default-skin"></video>
-    </el-col>
-</el-row>
+<div class='app-container'>
+    <el-row :gutter="32">
+        <el-col :span="16">
+            <el-col :span="24" style="text-align: left;" >
+                <el-tag class="title-tag">正在播放 {{ this.name }} 处监控视频</el-tag>
+            </el-col>
+            <el-col :span="24">
+                <div class="grid-content bg-purple-dark"></div>
+                <video id='my-player' class="video-js vjs-big-play-centered vjs-default-skin right-row"></video>
+            </el-col>
+        </el-col>
+        <el-col :span="8">
+            <el-col :span="24" style="text-align: left;" >
+                <el-tag class="title-tag">监控控制台</el-tag>
+            </el-col>
+            <el-col :span="24" style="border: 1px solid black">
+                <div>
+                    <tr><td>1111</td><td><el-button class="ctrl-btn" type="primary">↑</el-button></td><td>1111</td></tr>
+                    <tr><td><el-button class="ctrl-btn" type="primary">←</el-button></td><td>1111</td>
+                    <td><el-button class="ctrl-btn" type="primary">→</el-button></td></tr>
+                    <tr><td>1111</td><td><el-button class="ctrl-btn" type="primary">↓</el-button></td><td>1111</td></tr>
+                </div>
+            </el-col>
+        </el-col>
+        <el-col :span="24">
+            <el-col :span="12" >
+            <el-row class="right-row">
+                <el-tag class="title-tag">实时数据</el-tag>
+            </el-row>
+            <el-row class="right-row">
+                <el-input v-model="data.name">
+                    <template slot="prepend">name：</template>
+                </el-input>
+            </el-row>
+            <el-row class="right-row">
+                <el-input v-model="data.name">
+                    <template slot="prepend">resolution：</template>
+                </el-input>
+            </el-row>
+            <el-row class="right-row">
+                <el-input v-model="data.name">
+                    <template slot="prepend">viewers：</template>
+                </el-input>
+            </el-row>
+            <el-row class="right-row">
+                <el-input v-model="data.name">
+                    <template slot="prepend">time：</template>
+                </el-input>
+            </el-row>
+        </el-col>
+        <el-col :span="12" >
+            <el-row class="right-row">
+                <el-tag class="title-tag">监控信息</el-tag>
+            </el-row>
+            <el-row class="right-row">
+                <el-input v-model="data.name">
+                    <template slot="prepend">ID：</template>
+                </el-input>
+            </el-row>
+            <el-row class="right-row">
+                <el-input v-model="data.name">
+                    <template slot="prepend">Flash version：</template>
+                </el-input>
+            </el-row>
+            <el-row class="right-row">
+                <el-input v-model="data.name">
+                    <template slot="prepend">SWF URL：</template>
+                </el-input>
+            </el-row>
+            <el-row class="right-row">
+                <el-input v-model="data.name">
+                    <template slot="prepend">Timestamp：</template>
+                </el-input>
+            </el-row>
+        </el-col>
+        </el-col>
+    </el-row>
+</div>
 </template>
 <script>
 export default {
@@ -15,6 +97,7 @@ export default {
         return {
             name: '',
             src: '',
+            data: '',
             playerOptionsFlag : {
                 height: 300,
                 loop: false,
@@ -34,9 +117,10 @@ export default {
         this.initVideo()
     },
     created: function() {
-        var params = this.$route.params
-        this.src = params.src + '/' + params.name
-        this.name = params.name
+        // var params = this.$route.params
+        // this.src = params.src + '/' + params.name
+        // this.name = params.name
+        this.data = this.params.data
     },
     destroyed: function() {
       this.$video('my-player').dispose()

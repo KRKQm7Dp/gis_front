@@ -1,3 +1,98 @@
+[
+  {
+    "name": [
+      "test"
+    ],
+    "bw_in": "232.48 kB",
+    "bw_out": "0",
+    "bytes_in": "1.16 MB",
+    "bytes_out": "0",
+    "time": "0 years 0 days 0 hours 0 minutes 44 seconds",
+    "viewers": 0,
+    "resolution": "696X392",
+    "client": [
+      {
+        "id": [
+          "28675"
+        ],
+        "address": [
+          "117.136.57.170"
+        ],
+        "time": [
+          "44934"
+        ],
+        "flashver": [
+          "FMLE/3.0 (compatible; FMSc/1.0)"
+        ],
+        "swfurl": [
+          "rtmp://39.107.125.189/myapp"
+        ],
+        "dropped": [
+          "0"
+        ],
+        "avsync": [
+          "21"
+        ],
+        "timestamp": [
+          "43487"
+        ],
+        "publishing": [
+          ""
+        ],
+        "active": [
+          ""
+        ]
+      }
+    ]
+  },
+  {
+    "name": [
+      "test11"
+    ],
+    "bw_in": "39.99 kB",
+    "bw_out": "0",
+    "bytes_in": "283.07 kB",
+    "bytes_out": "0",
+    "time": "0 years 0 days 0 hours 1 minutes 2 seconds",
+    "viewers": 0,
+    "resolution": "1024X768",
+    "client": [
+      {
+        "id": [
+          "28668"
+        ],
+        "address": [
+          "117.136.57.170"
+        ],
+        "time": [
+          "62711"
+        ],
+        "flashver": [
+          "FMLE/3.0 (compatible; Lavf58.35"
+        ],
+        "dropped": [
+          "0"
+        ],
+        "avsync": [
+          "-61233"
+        ],
+        "timestamp": [
+          "61233"
+        ],
+        "publishing": [
+          ""
+        ],
+        "active": [
+          ""
+        ]
+      }
+    ]
+  }
+]
+
+
+
+---------------------------------------------------------------
 {
   "nginx_version": [
     "1.16.1"

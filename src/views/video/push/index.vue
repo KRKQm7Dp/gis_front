@@ -149,8 +149,9 @@ export default {
           path: '/video/play',
           name: 'Play',
           params: {
-            src: scope.row.client[0].swfurl[0],
-            name: scope.row.name[0]
+            // src: scope.row.client[0].swfurl[0],
+            // name: scope.row.name[0]
+            data: scope.row
           }
         })  // query: {src: scope.row.client[0].swfurl[0],name: scope.row.name} 也可使用 params 传递参数， 使用 query 传递参数在地址栏可见
       },

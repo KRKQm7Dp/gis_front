@@ -10,6 +10,7 @@
   align-items: center;
   justify-content: center;
   height: 232px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
 }
 .rigth-second{
   background: #FFFFFF;
@@ -21,6 +22,7 @@
   align-items: center;
   justify-content: center;
   height: 100px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
 }
 .small-in{
   background: #FFFFFF;
@@ -32,6 +34,7 @@
   align-items: center;
   justify-content: center;
   height: 100px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
 }
 .row-three{
   margin-top: 32px;
@@ -43,6 +46,7 @@
   align-items: center;
   justify-content: center;
   height: 120px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
 }
 .content-up{
   margin: 0; 
@@ -57,9 +61,10 @@
   text-align: center; 
 }
 .chart-wrapper {
-  background: #fff;
+  background: #FFFFFF;
   padding: 16px 16px 0;
   margin: 32px 0 32px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
 }
 @media (max-width:1024px) {
   .chart-wrapper {
@@ -68,7 +73,7 @@
 }
 </style>
 <template>
-  <div class='app-container' style="width: 100%; height: 900px; background: #EEF0F3">
+  <div class='app-container' style="width: 100%; height: 900px; background: #EEF0F3; padding: 32px">
 
     <el-row :gutter="32">
       <el-col :xs="24" :sm="24" :lg="15">
