@@ -179,7 +179,7 @@ export const asyncRoutes =
     component: Layout,
     children: [
       {
-        path: 'http://localhost:8082/chat/chatroom?UAA_ACCESS_TOKEN=' + getToken(),
+        path: process.env.VUE_APP_CHAT_API+'/chat/chatroom?UAA_ACCESS_TOKEN=' + getToken(),
         meta: { title: '交流中心', icon: 'link' }
       }
     ]

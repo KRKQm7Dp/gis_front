@@ -4,6 +4,7 @@ import router, { resetRouter } from '@/router'
 
 const state = {
   token: getToken(),
+  user_id: '',
   name: '',
   avatar: '',
   introduction: '',
@@ -25,6 +26,9 @@ const mutations = {
   },
   SET_ROLES: (state, roles) => {
     state.roles = roles
+  },
+  SET_UID: (state, uId) => {
+    state.user_id = uId
   }
 }
 
@@ -55,12 +59,10 @@ const actions = {
           reject('Verification failed, please Login again.')
         }
 
-        const { authorities, principal, avatar, introduction } = data.data
-        const roles = []
-        authorities.forEach(element => {
-          roles.push(element['authority'])
-        });
+        const { uId, roles, uLoginid, uHeadportrait, uSignature } = data.data
         console.log(roles)
+        console.log('00000000000000000000')
+        console.log(uId)
 
         // roles must be a non-empty array
         if (!roles || roles.length <= 0) {
@@ -68,9 +70,11 @@ const actions = {
         }
 
         commit('SET_ROLES', roles)
-        commit('SET_NAME', principal)
-        commit('SET_AVATAR', avatar)
-        commit('SET_INTRODUCTION', introduction)
+        commit('SET_NAME', uLoginid)
+        commit('SET_AVATAR', process.env.VUE_APP_CHAT_API + uHeadportrait)
+        commit('SET_INTRODUCTION', uSignature)
+        commit('SET_UID', uId)
+        
         resolve(data)
       }).catch(error => {
         reject(error)

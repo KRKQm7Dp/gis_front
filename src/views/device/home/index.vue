@@ -263,10 +263,22 @@ export default {
         console.log("submit!");
         console.log(this.device);
         this.device.status = false
-        this.device.userId = store.getters.name
+        this.device.userId = store.getters.user_id
         addDevice(this.device)
           .then(response => {
             this.getDevices();
+            this.dialogVisible = false;
+            const { id, name, describe } = this.device;
+            this.$notify({
+            title: "Success",
+            dangerouslyUseHTMLString: true,
+            message: `
+                        <div>设备号: ${id}</div>
+                        <div>设备名: ${name}</div>
+                        <div>描　述: ${describe}</div>
+                    `,
+            type: "success"
+            });
             this.showConfigJson = true
             this.configValue = response
           })
@@ -277,18 +289,6 @@ export default {
               duration: 5 * 1000
             });
           });
-        this.dialogVisible = false;
-        const { id, name, describe } = this.device;
-        this.$notify({
-          title: "Success",
-          dangerouslyUseHTMLString: true,
-          message: `
-                    <div>设备号: ${id}</div>
-                    <div>设备名: ${name}</div>
-                    <div>描　述: ${describe}</div>
-                `,
-          type: "success"
-        });
       }
     }
   }
