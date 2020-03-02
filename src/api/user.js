@@ -1,14 +1,6 @@
 import request from '@/utils/request'
 import qs from 'qs'
 
-// export function login(data) {
-//   return request({
-//     url: '/user/login',
-//     method: 'post',
-//     data
-//   })
-// }
-
 console.log(process.env.VUE_APP_UAA_API)
 console.log(process.env.VUE_APP_BASE_API)
 

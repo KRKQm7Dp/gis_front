@@ -158,6 +158,21 @@ export const asyncRoutes =
       }
     ]
   },
+  {
+    path: '/device',
+    component: Layout,
+    redirect: '/device/home',
+    name: 'Device',
+    meta: { title: '物联网设备管理', icon: 'example' },
+    children: [
+      {
+        path: 'home',
+        name: 'DeviceHome',
+        component: () => import('@/views/device/home/index'),
+        meta: { title: '设备管理', icon: 'tree' }
+      },
+    ]
+  },
   
   {
     path: 'chatroom',

@@ -88,16 +88,8 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import SocketIO from 'socket.io-client'
-import VueSocketIO from 'vue-socket.io'
 import { secondsToHuman, byteToHuman } from '@/utils/helper'
 import { drop } from '@/api/stream'
-
-Vue.use(new VueSocketIO({
-    debug: false,
-    connection: SocketIO(process.env.VUE_APP_RTMP_MONITOR_URL)
-  }))
 
 export default {
     data() {
@@ -119,6 +111,7 @@ export default {
           this.tableData = []
           console.log(data.server[0].application[0])
           var apps = data.server[0].application[0].live[0].stream
+          var appName = data.server[0].application[0].name[0]
           console.log('------')
           if (apps !== null && apps !== undefined){
             for (let i in apps) {
@@ -132,6 +125,7 @@ export default {
               row.viewers = parseInt(apps[i].nclients[0]) - 1
               row.resolution = apps[i].meta[0].video[0].width[0] + 'X' + apps[i].meta[0].video[0].height[0];
               row.client = apps[i].client
+              row.src = process.env.VUE_APP_RTMP_SERVER_URL + '/' + appName + '/' + apps[i].name
               this.tableData.push(row)
             }
           }else{
@@ -144,21 +138,15 @@ export default {
     methods:{
       handlePlay(scope) {
         console.log('==========================')
-        console.log(scope.row.client[0].swfurl[0])
+        console.log(scope.row)
         this.$router.push({
           path: '/video/play',
           name: 'Play',
           params: {
-            // src: scope.row.client[0].swfurl[0],
-            // name: scope.row.name[0]
             data: scope.row
           }
         })  // query: {src: scope.row.client[0].swfurl[0],name: scope.row.name} 也可使用 params 传递参数， 使用 query 传递参数在地址栏可见
       },
-      // handleRecord(scope) {
-      //   var name = scope.row.name
-      //   window.location.href = process.env.VUE_APP_RTMP_URL + '/control/record/start?app=myapp&name='+ name +'&rec=rec1'
-      // }
       handleDrop(scope) {
         var params = {
           name: '',

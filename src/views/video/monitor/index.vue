@@ -40,16 +40,7 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import { secondsToHuman, byteToHuman } from '@/utils/helper'
-import SocketIO from 'socket.io-client';
-import VueSocketIO from 'vue-socket.io';
-
-
-Vue.use(new VueSocketIO({
-    debug: false,
-    connection: SocketIO(process.env.VUE_APP_RTMP_MONITOR_URL)
-  }))
 
 export default {
     data() {
@@ -112,12 +103,13 @@ export default {
         },
         statistics: function (data) {
             var apps = data.server[0].application[0].live[0].stream
+            var appName = data.server[0].application[0].name[0]
             this.playerOptions = []
             this.streamList = []
             this.videoNames = []
             if( apps !== null && apps !== undefined ){
               for(let i = 0; i < apps.length; i++){
-                var videoSrc = apps[0].client[0].swfurl[0] + '/' + apps[i].name
+                var videoSrc = process.env.VUE_APP_RTMP_SERVER_URL + '/' + appName + '/' + apps[i].name
                 console.log('========================')
                 console.log(videoSrc)
                 this.streamList.push(videoSrc)

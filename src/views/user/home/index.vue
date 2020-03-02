@@ -71,8 +71,8 @@
     </el-table>
 
     <el-dialog :visible.sync="dialogVisible" :title="dialogType==='edit'?'Edit User':'New User'">
-      <el-form ref="ruleForm" :rules="rules" :model="user" label-width="120px" label-position="right">
-            <el-row>
+      <el-form ref="ruleForm" :rules="rules" :model="user" label-width="90px" label-position="left">
+            <el-row :gutter="32">
                 <el-col :span="12">
                     <el-form-item label="用户 ID"  prop="uLoginid">
                         <el-input v-model="user.uLoginid"></el-input>
@@ -293,7 +293,7 @@ export default {
       const isEdit = this.dialogType === 'edit'
       console.log('-------------user------------')
       console.log(this.user)
-      this.user.roles = this.user.roles.filter(Boolean)
+      this.user.roles = this.user.roles.filter(Boolean)  // 当用户没有角色时候，授予其角色，去除其中的 null 值
       if (isEdit) {
         await updateUser(this.user.uId, this.user)
         this.getUsers()

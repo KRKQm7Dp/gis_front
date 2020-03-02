@@ -21,7 +21,20 @@ import Video from 'video.js'
 import'videojs-flash'
 import 'video.js/dist/video-js.css'
 
+import SocketIO from 'socket.io-client';
+import VueSocketIO from 'vue-socket.io';
+import BaiduMap from 'vue-baidu-map'
+
 Vue.prototype.$video = Video
+
+Vue.use(new VueSocketIO({
+  debug: true,
+  connection: SocketIO(process.env.VUE_APP_RTMP_MONITOR_URL)
+}))
+Vue.use(BaiduMap, {
+  // ak 是在百度地图开发者平台申请的密钥 详见 http://lbsyun.baidu.com/apiconsole/key */
+  ak: 'KAgZVujST65ourNvr5EibnPMYH3XUS85'
+})
 
 /**
  * If you don't want to use mock-server
