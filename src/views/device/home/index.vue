@@ -8,7 +8,7 @@
   width: 100%;
   height: 200px;
 }
-.editor-container{
+.editor-container {
   position: relative;
   height: 100%;
 }
@@ -19,7 +19,7 @@
       <el-input
         style="width: 300px; margin-right: 10px;"
         v-model="queryParam.search"
-        placeholder="请输入用户名执行搜索"
+        placeholder="请输入设备名执行搜索"
       ></el-input>
       <el-button type="primary" @click="getDevices">搜索一下</el-button>
       <el-button type="success" @click="handleAddDevice">添加设备</el-button>
@@ -92,9 +92,16 @@
             color: #606266;
             line-height: 40px;
             padding: 0 12px 0 0;"
-         v-show="dialogType==='edit'"
+          v-show="dialogType==='edit'"
         >手动校正设备定位（定位优先以设备自动检测为准，请谨慎修改!）</div>
-        <baidu-map class="bm-view"  v-show="dialogType==='edit'" :center="center" :zoom="zoom" @ready="BaiduMapReadyHandler" @click="BaiduMapClickHandler">
+        <baidu-map
+          class="bm-view"
+          v-show="dialogType==='edit'"
+          :center="center"
+          :zoom="zoom"
+          @ready="BaiduMapReadyHandler"
+          @click="BaiduMapClickHandler"
+        >
           <bm-city-list anchor="BMAP_ANCHOR_TOP_LEFT"></bm-city-list>
           <bm-navigation anchor="BMAP_ANCHOR_TOP_RIGHT"></bm-navigation>
           <bm-geolocation
@@ -102,12 +109,7 @@
             :showAddressBar="true"
             :autoLocation="true"
           ></bm-geolocation>
-          <bm-marker
-            :position="center"
-            :dragging="true"
-            animation="BMAP_ANIMATION_BOUNCE"
-          >
-          </bm-marker>
+          <bm-marker :position="center" :dragging="true" animation="BMAP_ANIMATION_BOUNCE"></bm-marker>
         </baidu-map>
       </el-form>
       <div style="text-align:right;margin-top: 20px;">
@@ -116,19 +118,19 @@
       </div>
     </el-dialog>
 
-     <el-dialog
-      :visible.sync="showConfigJson"
-    >
-    <div class="editor-container">
-      <json-editor v-model="configValue" />
-    </div>
+    <el-dialog :visible.sync="showConfigJson"
+        title="设备配置文件 config.json">
+      <div class="editor-container">
+        <json-editor ref="jsonEditor" v-model="configValue" />
+      </div>
     </el-dialog>
   </div>
 </template>
 
 <script>
+import JsonEditor from "@/components/JsonEditor";
 import { deepClone } from "@/utils";
-import store from '../../../store'
+import store from "../../../store";
 import {
   getDeviceByPage,
   addDevice,
@@ -148,6 +150,8 @@ const defaultDevice = {
 };
 
 export default {
+  name: "JsonEditorDemo",
+  components: { JsonEditor },
   data() {
     return {
       mapIcon: require("@/icons/monitor.png"),
@@ -167,23 +171,23 @@ export default {
       dialogVisible: false,
       dialogType: "new",
       showConfigJson: false,
-      configValue:'',
+      configValue: ""
     };
   },
   created() {
     this.getDevices();
   },
   methods: {
-    BaiduMapClickHandler({type, target, point, pixel, overlay}){
-        console.log("鼠标单击地图")
-        console.log(type, target, point, pixel, overlay)
-        console.log("当前定位: x=" + point.lng + " y=" + point.lat)
-        this.center = point
-        this.device.positionX = point.lng
-        this.device.positionY = point.lat
+    BaiduMapClickHandler({ type, target, point, pixel, overlay }) {
+      console.log("鼠标单击地图");
+      console.log(type, target, point, pixel, overlay);
+      console.log("当前定位: x=" + point.lng + " y=" + point.lat);
+      this.center = point;
+      this.device.positionX = point.lng;
+      this.device.positionY = point.lat;
     },
     BaiduMapReadyHandler({ BMap, map }) {
-        map.enableScrollWheelZoom()
+      map.enableScrollWheelZoom();
       console.log(BMap, map);
       this.center.lng = this.device.positionX;
       this.center.lat = this.device.positionY;
@@ -247,40 +251,40 @@ export default {
         });
     },
     handleAddDevice() {
-      this.device = Object.assign({}, defaultDevice)
+      this.device = Object.assign({}, defaultDevice);
       this.dialogType = "new";
       this.dialogVisible = true;
     },
     async confirmUser() {
       const isEdit = this.dialogType === "edit";
-      console.log("-------------device------------")
+      console.log("-------------device------------");
       console.log(this.device);
       if (isEdit) {
         await updateDevice(this.device);
         this.getDevices();
-        this.dialogVisible = false
+        this.dialogVisible = false;
       } else {
         console.log("submit!");
         console.log(this.device);
-        this.device.status = false
-        this.device.userId = store.getters.user_id
+        this.device.status = false;
+        this.device.userId = store.getters.user_id;
         addDevice(this.device)
           .then(response => {
             this.getDevices();
             this.dialogVisible = false;
             const { id, name, describe } = this.device;
             this.$notify({
-            title: "Success",
-            dangerouslyUseHTMLString: true,
-            message: `
+              title: "Success",
+              dangerouslyUseHTMLString: true,
+              message: `
                         <div>设备号: ${id}</div>
                         <div>设备名: ${name}</div>
                         <div>描　述: ${describe}</div>
                     `,
-            type: "success"
+              type: "success"
             });
-            this.showConfigJson = true
-            this.configValue = response
+            this.showConfigJson = true;
+            this.configValue = response.data.data;
           })
           .catch(e => {
             Message({
