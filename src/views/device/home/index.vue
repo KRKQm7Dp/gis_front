@@ -118,10 +118,12 @@
       </div>
     </el-dialog>
 
-    <el-dialog :visible.sync="showConfigJson"
-        title="设备配置文件 config.json">
+    <el-dialog :visible.sync="showConfigJson" title="设备配置文件 config.json">
       <div class="editor-container">
         <json-editor ref="jsonEditor" v-model="configValue" />
+      </div>
+      <div style="text-align:right;margin-top: 20px;">
+        <el-button type="primary" icon="el-icon-download" @click="downloadConfigFile">转存为文件</el-button>
       </div>
     </el-dialog>
   </div>
@@ -135,7 +137,8 @@ import {
   getDeviceByPage,
   addDevice,
   updateDevice,
-  deleteDevice
+  deleteDevice,
+  configJsonToFile
 } from "@/api/device";
 
 const defaultDevice = {
@@ -294,6 +297,23 @@ export default {
             });
           });
       }
+    },
+    downloadConfigFile() {
+      configJsonToFile(this.configValue).then(response => {
+        console.log("转存为文件");
+        console.log(response);
+        let url = window.URL.createObjectURL(new Blob([response.data]));
+        console.log(url);
+        // 生成一个a标签
+        let link = document.createElement("a");
+        link.style.display = "none";
+        link.href = url;
+        // 生成时间戳
+        let timestamp = new Date().getTime();
+        link.download = timestamp + "_config.json";
+        document.body.appendChild(link);
+        link.click();
+      });
     }
   }
 };

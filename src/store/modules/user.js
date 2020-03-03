@@ -69,7 +69,12 @@ const actions = {
           reject('getInfo: roles must be a non-null array!')
         }
 
-        commit('SET_ROLES', roles)
+        var resetRoles = []
+        roles.forEach(role => {      // 将返回的额 roles 重置为 ['ROLE_ADMIN','ROLE_USER'] 格式
+          resetRoles.push(role.roleName)
+        });
+
+        commit('SET_ROLES', resetRoles)
         commit('SET_NAME', uLoginid)
         commit('SET_AVATAR', process.env.VUE_APP_CHAT_API + uHeadportrait)
         commit('SET_INTRODUCTION', uSignature)

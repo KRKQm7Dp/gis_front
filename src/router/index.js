@@ -129,19 +129,31 @@ export const asyncRoutes =
     component: Layout,
     redirect: '/video/home',
     name: 'Video',
-    meta: { title: '流媒体服务管理', icon: 'example' },
+    meta: { 
+      title: '流媒体服务管理', 
+      icon: 'example' ,
+      roles: ['ROLE_ADMIN','ROLE_USER']
+  },
     children: [
       {
         path: 'home',
         name: 'VideoHome',
         component: () => import('@/views/video/home/index'),
-        meta: { title: '资源监控', icon: 'tree' }
+        meta: { 
+          title: '资源监控', 
+          icon: 'tree',
+          roles: ['ROLE_ADMIN','ROLE_USER']
+        }
       },
       {
         path: 'push',
         name: 'Push',
         component: () => import('@/views/video/push/index'),
-        meta: { title: '推流列表', icon: 'table' }
+        meta: { 
+          title: '推流列表', 
+          icon: 'table',
+          roles: ['ROLE_ADMIN','ROLE_USER']
+        }
       },
       {
         path: '/video/play',
@@ -154,7 +166,11 @@ export const asyncRoutes =
         path: 'monitor',
         name: 'Monitor',
         component: () => import('@/views/video/monitor/index'),
-        meta: { title: '视频图像', icon: 'tree' }
+        meta: {
+          title: '视频图像', 
+          icon: 'tree',
+          roles: ['ROLE_ADMIN','ROLE_USER']
+        }
       }
     ]
   },
@@ -163,13 +179,21 @@ export const asyncRoutes =
     component: Layout,
     redirect: '/device/home',
     name: 'Device',
-    meta: { title: '物联网设备管理', icon: 'example' },
+    meta: { 
+      title: '物联网设备管理', 
+      icon: 'example',
+      roles: ['ROLE_ADMIN','ROLE_USER']
+    },
     children: [
       {
         path: 'home',
         name: 'DeviceHome',
         component: () => import('@/views/device/home/index'),
-        meta: { title: '设备管理', icon: 'tree' }
+        meta: { 
+          title: '设备管理', 
+          icon: 'tree',
+          roles: ['ROLE_ADMIN','ROLE_USER']
+        }
       },
     ]
   },
