@@ -20,6 +20,7 @@
         style="width: 300px; margin-right: 10px;"
         v-model="queryParam.search"
         placeholder="请输入设备名执行搜索"
+        clearable
       ></el-input>
       <el-button type="primary" @click="getDevices">搜索一下</el-button>
       <el-button type="success" @click="handleAddDevice">添加设备</el-button>
@@ -174,11 +175,21 @@ export default {
       dialogVisible: false,
       dialogType: "new",
       showConfigJson: false,
-      configValue: ""
+      configValue: "",
+      timer: null,
     };
   },
   created() {
     this.getDevices();
+  },
+  mounted() {
+      this.timer = setInterval(() => {
+          console.log("定时执行")
+          this.getDevicesNoRefresh()
+      }, 5000);
+  },
+  destroyed() {
+      clearInterval(this.timer)
   },
   methods: {
     BaiduMapClickHandler({ type, target, point, pixel, overlay }) {
@@ -205,6 +216,23 @@ export default {
           this.total = response.data.data.total;
           console.log("total=" + this.total);
           this.loading = false;
+        })
+        .catch(e => {
+          console.log(e);
+          Message({
+            message: e.message,
+            type: "error",
+            duration: 5 * 1000
+          });
+        });
+    },
+    getDevicesNoRefresh() {
+      console.log(this.queryParam);
+      getDeviceByPage(this.queryParam)
+        .then(response => {
+          this.tableData = response.data.data.rows;
+          this.total = response.data.data.total;
+          console.log("total=" + this.total);
         })
         .catch(e => {
           console.log(e);

@@ -8,7 +8,7 @@
 <template>
   <div class='app-container'>
     <div class="box">
-      <el-input style="width: 300px; margin-right: 10px;" v-model="queryParam.search" placeholder="请输入用户名执行搜索"></el-input>
+      <el-input style="width: 300px; margin-right: 10px;" v-model="queryParam.search" placeholder="请输入用户名执行搜索" clearable></el-input>
       <el-button type="primary" @click="getUsers">搜索一下</el-button>
       <el-button type="success" @click="handleAddUser">新建用户</el-button>
     </div>
