@@ -195,6 +195,17 @@ export const asyncRoutes =
           roles: ['ROLE_ADMIN','ROLE_USER']
         }
       },
+      {
+        path: 'temp_hum_chart',
+        name: 'TempHumChart',
+        hidden: true,
+        component: () => import('@/views/device/home/temp_hum_chart'),
+        meta: { 
+          title: '温湿度监测', 
+          icon: 'tree',
+          roles: ['ROLE_ADMIN','ROLE_USER']
+        }
+      },
     ]
   },
   

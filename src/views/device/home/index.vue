@@ -40,9 +40,10 @@
       border
       v-loading="loading"
       style="width: 100%;margin-top:30px;"
+      @row-click="rowClickHandler"
     >
       <el-table-column type="index" width="50"></el-table-column>
-      <el-table-column prop="id" label="索引"></el-table-column>
+      <el-table-column prop="id" label="设备号"></el-table-column>
       <el-table-column prop="name" label="设备名"></el-table-column>
       <el-table-column prop="describe" label="设备描述"></el-table-column>
       <el-table-column prop="status" label="设备状态">
@@ -53,8 +54,8 @@
       </el-table-column>
       <el-table-column label="操作" align="center" width="220">
         <template slot-scope="scope">
-          <el-button type="primary" size="small" @click="handleEdit(scope)">编辑</el-button>
-          <el-button type="danger" size="small" @click="handleDelete(scope)">删除</el-button>
+          <el-button type="primary" size="small" @click.stop="handleEdit(scope)">编辑</el-button>
+          <el-button type="danger" size="small" @click.stop="handleDelete(scope)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -183,13 +184,13 @@ export default {
     this.getDevices();
   },
   mounted() {
-      this.timer = setInterval(() => {
-          console.log("定时执行")
-          this.getDevicesNoRefresh()
-      }, 5000);
+    //   this.timer = setInterval(() => {
+    //       console.log("定时执行")
+    //       this.getDevicesNoRefresh()
+    //   }, 5000);
   },
   destroyed() {
-      clearInterval(this.timer)
+    //   clearInterval(this.timer)
   },
   methods: {
     BaiduMapClickHandler({ type, target, point, pixel, overlay }) {
@@ -342,6 +343,17 @@ export default {
         document.body.appendChild(link);
         link.click();
       });
+    },
+    rowClickHandler(row, column, event) {
+      console.log('点击行')
+      console.log(row)
+      this.$router.push({
+        path: '/device/temp_hum_chart',
+        name: 'TempHumChart',
+          params: {
+            deviceId: row.id
+          }
+      })
     }
   }
 };
