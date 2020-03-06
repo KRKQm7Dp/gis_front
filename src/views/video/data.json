@@ -1,264 +1,161 @@
-[
-  {
-    "name": [
-      "test"
-    ],
-    "bw_in": "232.48 kB",
-    "bw_out": "0",
-    "bytes_in": "1.16 MB",
-    "bytes_out": "0",
-    "time": "0 years 0 days 0 hours 0 minutes 44 seconds",
-    "viewers": 0,
-    "resolution": "696X392",
-    "client": [
-      {
-        "id": [
-          "28675"
-        ],
-        "address": [
-          "117.136.57.170"
-        ],
-        "time": [
-          "44934"
-        ],
-        "flashver": [
-          "FMLE/3.0 (compatible; FMSc/1.0)"
-        ],
-        "swfurl": [
-          "rtmp://39.107.125.189/myapp"
-        ],
-        "dropped": [
-          "0"
-        ],
-        "avsync": [
-          "21"
-        ],
-        "timestamp": [
-          "43487"
-        ],
-        "publishing": [
-          ""
-        ],
-        "active": [
-          ""
-        ]
-      }
-    ]
-  },
-  {
-    "name": [
-      "test11"
-    ],
-    "bw_in": "39.99 kB",
-    "bw_out": "0",
-    "bytes_in": "283.07 kB",
-    "bytes_out": "0",
-    "time": "0 years 0 days 0 hours 1 minutes 2 seconds",
-    "viewers": 0,
-    "resolution": "1024X768",
-    "client": [
-      {
-        "id": [
-          "28668"
-        ],
-        "address": [
-          "117.136.57.170"
-        ],
-        "time": [
-          "62711"
-        ],
-        "flashver": [
-          "FMLE/3.0 (compatible; Lavf58.35"
-        ],
-        "dropped": [
-          "0"
-        ],
-        "avsync": [
-          "-61233"
-        ],
-        "timestamp": [
-          "61233"
-        ],
-        "publishing": [
-          ""
-        ],
-        "active": [
-          ""
-        ]
-      }
-    ]
-  }
-]
-
-
-
----------------------------------------------------------------
 {
-  "nginx_version": [
-    "1.16.1"
-  ],
-  "nginx_rtmp_version": [
-    "1.1.4"
-  ],
-  "compiler": [
-    "gcc 4.8.5 20150623 (Red Hat 4.8.5-39) (GCC) "
-  ],
-  "built": [
-    "Dec 28 2019 12:57:47"
-  ],
-  "pid": [
-    "17640"
-  ],
-  "uptime": [
-    "870802"
-  ],
-  "naccepted": [
-    "57"
-  ],
-  "bw_in": [
-    "1357520"
-  ],
-  "bytes_in": [
-    "2230529440"
-  ],
-  "bw_out": [
-    "0"
-  ],
-  "bytes_out": [
-    "34027579"
-  ],
-  "server": [
-    {
-      "application": [
-        {
-          "name": [
-            "myapp"
-          ],
-          "live": [
-            {
-              "stream": [
-                {
-                  "name": [
-                    "test1"
-                  ],
-                  "time": [
-                    "557197"
-                  ],
-                  "bw_in": [
-                    "1334744"
-                  ],
-                  "bytes_in": [
-                    "76878542"
-                  ],
-                  "bw_out": [
-                    "0"
-                  ],
-                  "bytes_out": [
-                    "0"
-                  ],
-                  "bw_audio": [
-                    "66944"
-                  ],
-                  "bw_video": [
-                    "1267800"
-                  ],
-                  "client": [
-                    {
-                      "id": [
-                        "41606"
-                      ],
-                      "address": [
-                        "223.104.17.213"
-                      ],
-                      "time": [
-                        "557882"
-                      ],
-                      "flashver": [
-                        "FMLE/3.0 (compatible; FMSc/1.0)"
-                      ],
-                      "swfurl": [
-                        "rtmp://39.107.125.189:1935/myapp"
-                      ],
-                      "dropped": [
-                        "0"
-                      ],
-                      "avsync": [
-                        "18"
-                      ],
-                      "timestamp": [
-                        "555417"
-                      ],
-                      "publishing": [
-                        ""
-                      ],
-                      "active": [
-                        ""
-                      ]
-                    }
-                  ],
-                  "meta": [
-                    {
-                      "video": [
-                        {
-                          "width": [
-                            "1280"
-                          ],
-                          "height": [
-                            "720"
-                          ],
-                          "frame_rate": [
-                            "30"
-                          ],
-                          "codec": [
-                            "H264"
-                          ],
-                          "profile": [
-                            "High"
-                          ],
-                          "compat": [
-                            "0"
-                          ],
-                          "level": [
-                            "3.1"
-                          ]
-                        }
-                      ],
-                      "audio": [
-                        {
-                          "codec": [
-                            "AAC"
-                          ],
-                          "profile": [
-                            "LC"
-                          ],
-                          "channels": [
-                            "2"
-                          ],
-                          "sample_rate": [
-                            "44100"
-                          ]
-                        }
-                      ]
-                    }
-                  ],
-                  "nclients": [
-                    "1"
-                  ],
-                  "publishing": [
-                    ""
-                  ],
-                  "active": [
-                    ""
-                  ]
-                }
-              ],
-              "nclients": [
-                "1"
-              ]
-            }
-          ]
-        }
-      ]
+  "nginx_version": "1.16.1",
+  "nginx_rtmp_version": "1.1.4",
+  "compiler": "gcc 4.8.5 20150623 (Red Hat 4.8.5-39) (GCC) ",
+  "built": "Dec 28 2019 12:57:47",
+  "pid": "1247",
+  "uptime": "250932",
+  "naccepted": "21",
+  "bw_in": "22336",
+  "bytes_in": "14380520",
+  "bw_out": "320",
+  "bytes_out": "10954141",
+  "server": {
+    "application": {
+      "name": "myapp",
+      "live": {
+        "stream": {
+          "name": "test",
+          "time": "10037",
+          "bw_in": "0",
+          "bytes_in": "49290",
+          "bw_out": "0",
+          "bytes_out": "0",
+          "bw_audio": "0",
+          "bw_video": "0",
+          "client": {
+            "id": "36987",
+            "address": "117.136.57.130",
+            "time": "10713",
+            "flashver": "FMLE/3.0 (compatible; Lavf58.35",
+            "dropped": "0",
+            "avsync": "-9767",
+            "timestamp": "9767",
+            "publishing": "",
+            "active": ""
+          },
+          "meta": {
+            "video": {
+              "width": "1024",
+              "height": "768",
+              "frame_rate": "30",
+              "codec": "H264",
+              "profile": "High",
+              "compat": "0",
+              "level": "4.0"
+            },
+            "audio": ""
+          },
+          "nclients": "1",
+          "publishing": "",
+          "active": ""
+        },
+        "nclients": "1"
+      }
     }
-  ]
+  }
+}
+
+=============================================================
+
+{
+  "nginx_version": "1.16.1",
+  "nginx_rtmp_version": "1.1.4",
+  "compiler": "gcc 4.8.5 20150623 (Red Hat 4.8.5-39) (GCC) ",
+  "built": "Dec 28 2019 12:57:47",
+  "pid": "1247",
+  "uptime": "251232",
+  "naccepted": "41",
+  "bw_in": "260992",
+  "bytes_in": "17199727",
+  "bw_out": "120",
+  "bytes_out": "10955491",
+  "server": {
+    "application": {
+      "name": "myapp",
+      "live": {
+        "stream": [
+          {
+            "name": "test",
+            "time": "96827",
+            "bw_in": "262480",
+            "bytes_in": "2684750",
+            "bw_out": "0",
+            "bytes_out": "0",
+            "bw_audio": "71744",
+            "bw_video": "190728",
+            "client": {
+              "id": "37059",
+              "address": "117.136.57.130",
+              "time": "97332",
+              "flashver": "FMLE/3.0 (compatible; FMSc/1.0)",
+              "swfurl": "rtmp://39.107.125.189/myapp",
+              "dropped": "0",
+              "avsync": "-7",
+              "timestamp": "95832",
+              "publishing": "",
+              "active": ""
+            },
+            "meta": {
+              "video": {
+                "width": "696",
+                "height": "392",
+                "frame_rate": "30",
+                "codec": "H264",
+                "profile": "High",
+                "compat": "0",
+                "level": "3.0"
+              },
+              "audio": {
+                "codec": "AAC",
+                "profile": "LC",
+                "channels": "2",
+                "sample_rate": "44100"
+              }
+            },
+            "nclients": "1",
+            "publishing": "",
+            "active": ""
+          },
+          {
+            "name": "test1",
+            "time": "15782",
+            "bw_in": "43928",
+            "bytes_in": "75904",
+            "bw_out": "0",
+            "bytes_out": "0",
+            "bw_audio": "0",
+            "bw_video": "43928",
+            "client": {
+              "id": "37102",
+              "address": "117.136.57.130",
+              "time": "16967",
+              "flashver": "FMLE/3.0 (compatible; Lavf58.35",
+              "dropped": "0",
+              "avsync": "-15567",
+              "timestamp": "15567",
+              "publishing": "",
+              "active": ""
+            },
+            "meta": {
+              "video": {
+                "width": "1024",
+                "height": "768",
+                "frame_rate": "30",
+                "codec": "H264",
+                "profile": "High",
+                "compat": "0",
+                "level": "4.0"
+              },
+              "audio": ""
+            },
+            "nclients": "1",
+            "publishing": "",
+            "active": ""
+          }
+        ],
+        "nclients": "2"
+      }
+    }
+  }
 }

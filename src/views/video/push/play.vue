@@ -26,7 +26,7 @@
     <el-row :gutter="32">
       <el-col :span="16">
         <el-col :span="24" style="text-align: left;">
-          <el-tag class="title-tag">正在播放 {{ this.name }} 处监控视频</el-tag>
+          <el-tag class="title-tag">正在播放 {{ this.data.name }} 处监控视频</el-tag>
         </el-col>
         <el-col :span="24">
           <div class="grid-content bg-purple-dark"></div>
@@ -96,22 +96,22 @@
             <el-tag class="title-tag">监控信息</el-tag>
           </el-row>
           <el-row class="right-row">
-            <el-input v-model="data.client[0].id[0]">
+            <el-input v-model="data.client.id">
               <template slot="prepend">ID：</template>
             </el-input>
           </el-row>
           <el-row class="right-row">
-            <el-input v-model="data.client[0].flashver[0]">
+            <el-input v-model="data.client.flashver">
               <template slot="prepend">Flash version：</template>
             </el-input>
           </el-row>
           <el-row class="right-row">
-            <el-input v-model="data.client[0].swfurl[0]">
+            <el-input v-model="data.client.swfurl">
               <template slot="prepend">SWF URL：</template>
             </el-input>
           </el-row>
           <el-row class="right-row">
-            <el-input v-model="data.client[0].timestamp[0]">
+            <el-input v-model="data.client.timestamp">
               <template slot="prepend">Timestamp：</template>
             </el-input>
           </el-row>
@@ -147,6 +147,7 @@ export default {
   },
   created: function() {
     this.data = this.$route.params.data;
+    console.log(this.data)
     if (this.data === null || this.data === undefined || this.data === "") {
       this.$router.push("/404");
     }

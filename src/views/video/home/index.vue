@@ -265,8 +265,8 @@ export default {
         console.log(this.chartDataCPU)
       },
       statistics: function (data) {
-        var bandwidth_in_per_sec_temp = byteToHuman(data.bw_in[0])
-        var bandwidth_out_per_sec_temp = byteToHuman(data.bw_out[0])
+        var bandwidth_in_per_sec_temp = byteToHuman(data.bw_in)
+        var bandwidth_out_per_sec_temp = byteToHuman(data.bw_out)
         if(bandwidth_in_per_sec_temp > this.bandwidth_in_per_sec){
           this.bandwidth_in_per_sec_icon = 'up'
         }else if(bandwidth_in_per_sec_temp < this.bandwidth_in_per_sec ){
@@ -283,11 +283,11 @@ export default {
         }
         this.bandwidth_in_per_sec = bandwidth_in_per_sec_temp
         this.bandwidth_out_per_sec  = bandwidth_out_per_sec_temp
-        this.total_bandwidth_in = byteToHuman(data.bytes_in[0])
-        this.total_bandwidth_out = byteToHuman(data.bytes_out[0])
-        this.up_time = secondsToHuman(data.uptime[0])
-        this.total_viewers = data.server[0].application[0].live[0].nclients[0]
-        this.total_request = data.naccepted[0]
+        this.total_bandwidth_in = byteToHuman(data.bytes_in)
+        this.total_bandwidth_out = byteToHuman(data.bytes_out)
+        this.up_time = secondsToHuman(data.uptime)
+        this.total_viewers = data.server.application.live.nclients
+        this.total_request = data.naccepted
       },
       
   },

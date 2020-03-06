@@ -10,28 +10,28 @@
           <template slot-scope="props">
             <el-form label-position="left" inline class="demo-table-expand">
               <el-form-item label="ID">
-                <span>{{ props.row.client[0].id[0] }}</span>
+                <span>{{ props.row.client.id }}</span>
               </el-form-item>
               <el-form-item label="Address">
-                <span>{{ props.row.client[0].address[0] }}</span>
+                <span>{{ props.row.client.address }}</span>
               </el-form-item>
               <el-form-item label="Flash version">
-                <span>{{ props.row.client[0].flashver[0] }}</span>
+                <span>{{ props.row.client.flashver }}</span>
               </el-form-item>
               <el-form-item label="SWF URL">
-                <span>{{ props.row.client[0].swfurl[0] }}</span>
+                <span>{{ props.row.client.swfurl }}</span>
               </el-form-item>
               <el-form-item label="Dropped">
-                <span>{{ props.row.client[0].dropped[0] }}</span>
+                <span>{{ props.row.client.dropped }}</span>
               </el-form-item>
               <el-form-item label="Timestamp">
-                <span>{{ props.row.client[0].timestamp[0] }}</span>
+                <span>{{ props.row.client.timestamp }}</span>
               </el-form-item>
               <el-form-item label="A-V">
-                <span>{{ props.row.client[0].avsync[0] }}</span>
+                <span>{{ props.row.client.avsync }}</span>
               </el-form-item>
               <el-form-item label="Time">
-                <span>{{ props.row.client[0].time[0] }}</span>
+                <span>{{ props.row.client.time }}</span>
               </el-form-item>
             </el-form>
           </template>
@@ -109,21 +109,29 @@ export default {
         },
         statistics: function (data) {
           this.tableData = []
-          console.log(data.server[0].application[0])
-          var apps = data.server[0].application[0].live[0].stream
-          var appName = data.server[0].application[0].name[0]
+          console.log(data.server.application)
+          var stream = data.server.application.live.stream
+          var appName = data.server.application.name
           console.log('------')
-          if (apps !== null && apps !== undefined){
+          if (stream !== null && stream !== undefined){
+            var apps = []
+            if(stream instanceof Array){
+              apps = stream
+            }else{
+              apps.push(stream)
+            }
             for (let i in apps) {
               var row = {}
               row.name = apps[i].name
-              row.bw_in = byteToHuman(apps[i].bw_in[0])
-              row.bw_out = byteToHuman(apps[i].bw_out[0])
-              row.bytes_in = byteToHuman(apps[i].bytes_in[0])
-              row.bytes_out = byteToHuman(apps[i].bytes_out[0])
-              row.time = secondsToHuman(apps[i].time[0] / 1000)
-              row.viewers = parseInt(apps[i].nclients[0]) - 1
-              row.resolution = apps[i].meta[0].video[0].width[0] + 'X' + apps[i].meta[0].video[0].height[0];
+              row.bw_in = byteToHuman(apps[i].bw_in)
+              row.bw_out = byteToHuman(apps[i].bw_out)
+              row.bytes_in = byteToHuman(apps[i].bytes_in)
+              row.bytes_out = byteToHuman(apps[i].bytes_out)
+              row.time = secondsToHuman(apps[i].time / 1000)
+              row.viewers = parseInt(apps[i].nclients) - 1
+              if(apps[i].meta != '' && apps[i].meta != null && apps[i].meta != undefined){
+                row.resolution = apps[i].meta.video.width + 'X' + apps[i].meta.video.height;
+              }
               row.client = apps[i].client
               row.src = process.env.VUE_APP_RTMP_SERVER_URL + '/' + appName + '/' + apps[i].name
               this.tableData.push(row)
@@ -145,15 +153,16 @@ export default {
           params: {
             data: scope.row
           }
-        })  // query: {src: scope.row.client[0].swfurl[0],name: scope.row.name} 也可使用 params 传递参数， 使用 query 传递参数在地址栏可见
+        })  // query: {src: scope.row.client.swfurl,name: scope.row.name} 也可使用 params 传递参数， 使用 query 传递参数在地址栏可见
       },
       handleDrop(scope) {
+        console.log(scope.row)
         var params = {
           name: '',
           clientid: ''
         }
         params.name = scope.row.name
-        params.clientid = scope.row.client[0].id[0]
+        params.clientid = scope.row.client.id
         drop(params).then(response => {
           if (response.data === 1) {
             this.$message({

@@ -13,7 +13,7 @@
 
     <el-row :gutter="32">
       <el-col :xs="24" :sm="24" :lg="8" >
-        <el-button type="primary" @click="loadingFlag = !loadingFlag">刷新视频流</el-button>
+        <el-button type="primary" @click="loadingFlag = true">刷新视频流</el-button>
       </el-col>
       <el-col :xs="24" :sm="24" :lg="8" >
         <el-radio-group v-model="radio" @change="radioChange">
@@ -102,21 +102,28 @@ export default {
             console.log('socket disconnected')
         },
         statistics: function (data) {
-            var apps = data.server[0].application[0].live[0].stream
-            var appName = data.server[0].application[0].name[0]
+            var stream = data.server.application.live.stream
+            var appName = data.server.application.name
             this.playerOptions = []
             this.streamList = []
             this.videoNames = []
-            if( apps !== null && apps !== undefined ){
+            if( stream !== null && stream !== undefined ){
+              var apps = []
+              if(stream instanceof Array){
+                apps = stream
+              }else{
+                apps.push(stream)
+              }
               for(let i = 0; i < apps.length; i++){
-                var videoSrc = process.env.VUE_APP_RTMP_SERVER_URL + '/' + appName + '/' + apps[i].name
+                let videoSrc = process.env.VUE_APP_RTMP_SERVER_URL + '/' + appName + '/' + apps[i].name
                 console.log('========================')
                 console.log(videoSrc)
                 this.streamList.push(videoSrc)
-                this.videoNames.push(apps[i].name[i])
+                this.videoNames.push(apps[i].name)
                 if (this.loadingFlag){
+                  console.log("刷新视频流")
                   this.loadVideo()
-                  this.loadingFlag = !this.loadingFlag
+                  this.loadingFlag = false
                 }
               }
             }else{
@@ -133,11 +140,12 @@ export default {
       loadVideo(){
         console.log('===========loadVideo============')
         for (let i in this.streamList) {
-          var src = this.streamList[i]
+          let stream_src = this.streamList[i]
+          console.log(stream_src)
           // this.videos[i].reset()
           this.videos[i].src([{
             type: 'rtmp/mp4',
-            src: src
+            src: stream_src
           },
           {
             withCredentials: false,
@@ -145,7 +153,7 @@ export default {
             src: ''
             }
           ]);
-          this.videos[i].load(src)
+          this.videos[i].load(stream_src)
           this.videos[i].play()
         }
       },
