@@ -28,7 +28,7 @@ import BaiduMap from 'vue-baidu-map'
 Vue.prototype.$video = Video
 
 Vue.use(new VueSocketIO({
-  debug: true,
+  debug: false,
   connection: SocketIO(process.env.VUE_APP_RTMP_MONITOR_URL)
 }))
 Vue.use(BaiduMap, {

@@ -6,7 +6,7 @@
         height="600"
         border
         style="width: 100%">
-        <el-table-column type="expand">
+        <!-- <el-table-column type="expand">
           <template slot-scope="props">
             <el-form label-position="left" inline class="demo-table-expand">
               <el-form-item label="ID">
@@ -35,7 +35,7 @@
               </el-form-item>
             </el-form>
           </template>
-        </el-table-column>
+        </el-table-column> -->
         <el-table-column
         prop="name"
         label="直播流">
@@ -70,16 +70,26 @@
         </el-table-column>
         <el-table-column
         prop=""
-        label="播放">
-          <template slot-scope="scope">
-            <el-button type="primary" size="small" @click="handlePlay(scope)">播放</el-button>
+        label="客户端"
+        width="200px">
+        <template slot-scope="scope">
+          <el-select v-model="clinetId" placeholder="请选择">
+            <el-option
+              v-for="item in scope.row.client"
+              :key="item.id"
+              :label="(item.hasOwnProperty('publishing') ? '推流客户端': '播放客户端') + '_' + item.id"
+              :value="item.id">
+            </el-option>
+          </el-select>
           </template>
         </el-table-column>
         <el-table-column
         prop=""
-        label="丢失">
+        label="操作"
+        width="200px">
           <template slot-scope="scope">
             <!-- <el-button type="primary" size="small" @click="handleRecord(scope)">录制</el-button> -->
+            <el-button type="primary" size="small" @click="handlePlay(scope)">播放</el-button>
             <el-button type="danger" size="small" @click="handleDrop(scope)">断开</el-button>
           </template>
         </el-table-column>
@@ -95,7 +105,8 @@ export default {
     data() {
       return {
         tableData: [],
-        emptyText: ''
+        emptyText: '',
+        clinetId: '',
       }
     },
     created() {
@@ -132,7 +143,13 @@ export default {
               if(apps[i].meta != '' && apps[i].meta != null && apps[i].meta != undefined){
                 row.resolution = apps[i].meta.video.width + 'X' + apps[i].meta.video.height;
               }
-              row.client = apps[i].client
+              var clients = apps[i].client
+              row.client = []
+              if(clients instanceof Array){
+                row.client =  clients
+              }else{
+                row.client.push(clients)
+              }
               row.src = process.env.VUE_APP_RTMP_SERVER_URL + '/' + appName + '/' + apps[i].name
               this.tableData.push(row)
             }
@@ -157,14 +174,23 @@ export default {
       },
       handleDrop(scope) {
         console.log(scope.row)
+        if(this.clinetId === '' || 
+          this.clinetId === undefined || 
+          this.clinetId === null){
+            this.$alert('请选择要断开的客户端', '提示', {
+              confirmButtonText: '确定',
+            });
+            return
+        }
         var params = {
           name: '',
           clientid: ''
         }
         params.name = scope.row.name
-        params.clientid = scope.row.client.id
+        params.clientid = this.clinetId
         drop(params).then(response => {
           if (response.data === 1) {
+            this.clinetId = null
             this.$message({
                 message: '断开视频流成功，等待重连......',
                 type: 'success',

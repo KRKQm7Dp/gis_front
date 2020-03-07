@@ -121,12 +121,15 @@
   </div>
 </template>
 <script>
+import { secondsToHuman, byteToHuman } from "@/utils/helper";
+
 export default {
   data() {
     return {
       name: "",
       src: "",
       data: "",
+      client: "",
       playerOptionsFlag: {
         height: 300,
         loop: false,
@@ -147,7 +150,7 @@ export default {
   },
   created: function() {
     this.data = this.$route.params.data;
-    console.log(this.data)
+    console.log(this.data);
     if (this.data === null || this.data === undefined || this.data === "") {
       this.$router.push("/404");
     }
@@ -173,6 +176,64 @@ export default {
       ]);
       myPlayer.load(src);
       myPlayer.play();
+    }
+  },
+  sockets: {
+    connect: function() {
+      console.log("socket connected");
+    },
+    disconnect: function() {
+      console.log("socket disconnected");
+    },
+    statistics: function(data) {
+      this.tableData = [];
+      console.log(data.server.application);
+      var stream = data.server.application.live.stream;
+      var appName = data.server.application.name;
+      console.log("------");
+      if (stream !== null && stream !== undefined) {
+        var apps = [];
+        if (stream instanceof Array) {
+          apps = stream;
+        } else {
+          apps.push(stream);
+        }
+        for (let i in apps) {
+          if (apps[i].name === this.data.name) {
+            this.data.name = apps[i].name;
+            this.data.bw_in = byteToHuman(apps[i].bw_in);
+            this.data.bw_out = byteToHuman(apps[i].bw_out);
+            this.data.bytes_in = byteToHuman(apps[i].bytes_in);
+            this.data.bytes_out = byteToHuman(apps[i].bytes_out);
+            this.data.time = secondsToHuman(apps[i].time / 1000);
+            this.data.viewers = parseInt(apps[i].nclients) - 1;
+            if (
+              apps[i].meta != "" &&
+              apps[i].meta != null &&
+              apps[i].meta != undefined
+            ) {
+              this.data.resolution =
+                apps[i].meta.video.width + "X" + apps[i].meta.video.height;
+            }
+
+            var clients = [];
+            if (apps[i].client instanceof Array) {
+              clients = apps[i].client;
+            } else {
+              clients.push(apps[i].client);
+            }
+            clients.forEach(c => {
+              if (c.pageurl === window.location.href) {
+                this.data.client = c;
+              }
+            });
+            console.log("=================");
+            console.log(this.data);
+          }
+        }
+      } else {
+        console.log("暂无流媒体设备接入");
+      }
     }
   }
 };

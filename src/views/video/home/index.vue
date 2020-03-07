@@ -79,7 +79,7 @@
       <el-col :xs="24" :sm="24" :lg="15">
         <div class="viewer">
           <h1 class="content-up" style="font-size:105px">{{ total_viewers }}</h1>
-          <p class="content-down" style="font-size:21px; padding: 20px">总观看人数 <svg-icon icon-class="viewers" /></p>
+          <p class="content-down" style="font-size:21px; padding: 20px">总客户端数 <svg-icon icon-class="viewers" /></p>
         </div>
       </el-col>
       <el-col :xs="24" :sm="24" :lg="9">
