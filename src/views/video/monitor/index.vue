@@ -116,15 +116,13 @@ export default {
               }
               for(let i = 0; i < apps.length; i++){
                 let videoSrc = process.env.VUE_APP_RTMP_SERVER_URL + '/' + appName + '/' + apps[i].name
-                console.log('========================')
-                console.log(videoSrc)
                 this.streamList.push(videoSrc)
                 this.videoNames.push(apps[i].name)
-                if (this.loadingFlag){
-                  console.log("刷新视频流")
-                  this.loadVideo()
-                  this.loadingFlag = false
-                }
+              }
+              if (this.loadingFlag){
+                console.log("刷新视频流")
+                this.loadVideo()
+                this.loadingFlag = false
               }
             }else{
               console.log('暂无视频流接入')
@@ -139,9 +137,11 @@ export default {
     methods:{
       loadVideo(){
         console.log('===========loadVideo============')
+        console.log(this.loadingFlag)
         for (let i in this.streamList) {
           let stream_src = this.streamList[i]
           console.log(stream_src)
+          console.log(this.videos[i])
           // this.videos[i].reset()
           this.videos[i].src([{
             type: 'rtmp/mp4',
