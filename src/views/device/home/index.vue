@@ -38,6 +38,7 @@
       :data="tableData"
       height="620"
       border
+      tooltip-effect="dark"
       v-loading="loading"
       style="width: 100%;margin-top:30px;"
       @row-click="rowClickHandler"
@@ -46,7 +47,8 @@
       <el-table-column prop="id" label="设备号"></el-table-column>
       <el-table-column prop="name" label="设备名"></el-table-column>
       <el-table-column prop="describe" label="设备描述"></el-table-column>
-      <el-table-column prop="status" label="设备状态">
+      <el-table-column prop="connTime" label="上次接入时间" width="160px"></el-table-column>
+      <el-table-column prop="status" label="设备状态" width="90px">
         <template slot-scope="scope">
           <template v-if="scope.row.status">在线</template>
           <template v-else>离线</template>

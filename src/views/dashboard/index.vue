@@ -23,7 +23,7 @@
               >
               <bm-info-window 
                 :show="item.show"
-                :title="item.name +' 设备信息'" 
+                :title="'【'+ item.name +'】 设备信息'" 
                 :closeOnClick="false"
                 @close="infoWindowClose(item, i)" >
                 <p>温度：{{ tempAndHum.temp === '' ? "获取温度失败" : tempAndHum.temp + "℃"}}</p>
