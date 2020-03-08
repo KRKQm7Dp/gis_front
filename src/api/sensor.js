@@ -7,3 +7,11 @@ export function getTempHumList(data) {
         params: data
     })
 }
+
+export function getLastTempHumList(data) {
+    return request({
+        url: process.env.VUE_APP_BASE_API + '/api/nowTempAndHum',
+        method: 'get',
+        params: data
+    })
+}

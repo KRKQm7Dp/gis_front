@@ -11,6 +11,13 @@ export function configJsonToFile(data) {
     })
 }
 
+export function getAllDevices() {
+    return request({
+        url: process.env.VUE_APP_BASE_API + '/api/allDevices',
+        method: 'get',
+    })
+}
+
 export function getDeviceByPage(data) {
     return request({
         url: process.env.VUE_APP_BASE_API + '/api/devices',
