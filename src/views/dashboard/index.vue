@@ -26,10 +26,10 @@
                 :title="'【'+ item.name +'】 设备信息'" 
                 :closeOnClick="false"
                 @close="infoWindowClose(item, i)" >
-                <p>温度：{{ tempAndHum.temp === '' ? "获取温度失败" : tempAndHum.temp + "℃"}}</p>
-                <p>湿度：{{ tempAndHum.humidity === '' ? "获取温度失败" : tempAndHum.humidity + "%"}}</p>
+                <p>温度：{{ tempAndHum === null ? "获取温度失败" : tempAndHum.temp + "℃"}}</p>
+                <p>湿度：{{ tempAndHum === null ? "获取温度失败" : tempAndHum.humidity + "%"}}</p>
                 <p>设备状态：{{ item.status ? "在线" : "离线" }}<svg-icon icon-class="light_4"  class-name='light-svg' style="margin-left:10px;width: 20px;height:20px;fill:#1afa29 !important;" /></p>
-                <p>获取数据时间：<br>{{ tempAndHum.time === '' ? "获取时间失败" : tempAndHum.time }}</p>
+                <p>获取数据时间：<br>{{ tempAndHum === null ? "获取时间失败" : tempAndHum.time }}</p>
                 <p>设备接入时间：<br>{{ item.connTime }}</p>
               </bm-info-window>
             </bm-marker>
@@ -98,8 +98,8 @@ export default {
             x += device.positionX
             y += device.positionY
           })
-          this.center.lng = x/2
-          this.center.lat = y/2
+          this.center.lng = x/this.devices.length
+          this.center.lat = y/this.devices.length
           console.log('================')
           console.log(this.devices)
         })

@@ -206,6 +206,16 @@ export const asyncRoutes =
           roles: ['ROLE_ADMIN','ROLE_USER']
         }
       },
+      {
+        path: 'controller',
+        name: 'Controller',
+        component: () => import('@/views/device/controller/index'),
+        meta: { 
+          title: '设备控制', 
+          icon: 'tree',
+          roles: ['ROLE_ADMIN','ROLE_USER']
+        }
+      },
     ]
   },
   
