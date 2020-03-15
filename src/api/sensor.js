@@ -15,3 +15,11 @@ export function getLastTempHumList(data) {
         params: data
     })
 }
+
+export function sendCtrlMsg(data) {
+    return request({
+        url: process.env.VUE_APP_BASE_API + '/api/send',
+        method: 'get',
+        params: data
+    })
+}
