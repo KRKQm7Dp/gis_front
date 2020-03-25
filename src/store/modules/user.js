@@ -76,7 +76,7 @@ const actions = {
 
         commit('SET_ROLES', resetRoles)
         commit('SET_NAME', uLoginid)
-        commit('SET_AVATAR', process.env.VUE_APP_CHAT_API + uHeadportrait)
+        commit('SET_AVATAR', uHeadportrait)
         commit('SET_INTRODUCTION', uSignature)
         commit('SET_UID', uId)
         
