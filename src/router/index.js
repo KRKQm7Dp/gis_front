@@ -132,7 +132,7 @@ export const asyncRoutes =
     meta: { 
       title: '流媒体服务管理', 
       icon: 'example' ,
-      roles: ['ROLE_ADMIN','ROLE_USER']
+      roles: ['ROLE_ADMIN','ROLE_USER','ROLE_VIP']
   },
     children: [
       {
@@ -142,7 +142,7 @@ export const asyncRoutes =
         meta: { 
           title: '资源监控', 
           icon: 'tree',
-          roles: ['ROLE_ADMIN','ROLE_USER']
+          roles: ['ROLE_ADMIN','ROLE_USER','ROLE_VIP']
         }
       },
       {
@@ -152,7 +152,7 @@ export const asyncRoutes =
         meta: { 
           title: '推流列表', 
           icon: 'table',
-          roles: ['ROLE_ADMIN','ROLE_USER']
+          roles: ['ROLE_ADMIN','ROLE_USER','ROLE_VIP']
         }
       },
       {
@@ -169,7 +169,7 @@ export const asyncRoutes =
         meta: {
           title: '视频图像', 
           icon: 'tree',
-          roles: ['ROLE_ADMIN','ROLE_USER']
+          roles: ['ROLE_ADMIN','ROLE_USER','ROLE_VIP']
         }
       }
     ]
@@ -182,7 +182,7 @@ export const asyncRoutes =
     meta: { 
       title: '物联网设备管理', 
       icon: 'example',
-      roles: ['ROLE_ADMIN','ROLE_USER']
+      roles: ['ROLE_ADMIN','ROLE_USER','ROLE_VIP']
     },
     children: [
       {
@@ -192,7 +192,7 @@ export const asyncRoutes =
         meta: { 
           title: '设备管理', 
           icon: 'tree',
-          roles: ['ROLE_ADMIN','ROLE_USER']
+          roles: ['ROLE_ADMIN','ROLE_USER','ROLE_VIP']
         }
       },
       {
@@ -203,19 +203,19 @@ export const asyncRoutes =
         meta: { 
           title: '温湿度监测', 
           icon: 'tree',
-          roles: ['ROLE_ADMIN','ROLE_USER']
+          roles: ['ROLE_ADMIN','ROLE_USER','ROLE_VIP']
         }
       },
-      {
-        path: 'controller',
-        name: 'Controller',
-        component: () => import('@/views/device/controller/index'),
-        meta: { 
-          title: '设备控制', 
-          icon: 'tree',
-          roles: ['ROLE_ADMIN','ROLE_USER']
-        }
-      },
+      // {
+      //   path: 'controller',
+      //   name: 'Controller',
+      //   component: () => import('@/views/device/controller/index'),
+      //   meta: { 
+      //     title: '设备控制', 
+      //     icon: 'tree',
+      //     roles: ['ROLE_ADMIN','ROLE_USER','ROLE_VIP']
+      //   }
+      // },
     ]
   },
   
